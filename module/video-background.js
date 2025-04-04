@@ -25,7 +25,7 @@ class VideoBackground extends HTMLElement {
     connectedCallback() {
         const videos = [
             // "/sources/background_video/Gura Yuri Camp.mp4",
-            "/sources/background_video/上杉绘梨衣.mp4",
+            // "/sources/background_video/上杉绘梨衣.mp4",
             "/sources/background_video/夏弥.mp4"
         ];
         const randomVideo = videos[Math.floor(Math.random() * videos.length)];
