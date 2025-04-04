@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主页</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="../../module/navbar.js"></script>
+    <script type="module" src="../../module/toolbar.js"></script>
+    <script type="module" src="../../module/video-background.js"></script>
+    <script type="module" src="../../module/return-home.js"></script>
+</head>
+
+<body>
+    <nav-bar></nav-bar>
+    <!-- 搜索框，添加更具描述性的类名 -->
+    <div class="vertical-search-container" id="search-container">
+        <input type="text" class="search-input" id="search-input" placeholder="输入搜索内容">
+        <select class="search-engine-select" id="search-engine-select">
+            <option value="https://www.bing.com/search?q=" selected>必应搜索</option>
+            <option value="https://www.google.com/search?q=">谷歌搜索</option>
+            <option value="https://yandex.com/search/?text=">Yandex搜索</option>
+        </select>
+        <button class="search-submit" onclick="performSearch()">搜索</button>
+    </div>
+    <tool-bar></tool-bar>
+    <video-background></video-background>
+    <return-home></return-home>
+
+    <!-- 为标题添加 id 属性 -->
+    <h1 id="main-title">欢迎来到我的网站</h1>
+    <!-- 假设这里有副标题，也添加 id 属性 -->
+    <h2 id="sub-title">副标题内容</h2>
+    <!-- 其他页面内容 -->
+
+    <script>
+        function performSearch() {
+            const input = document.getElementById('search-input').value;
+            const engine = document.getElementById('search-engine-select').value;
+            const searchUrl = engine + encodeURIComponent(input);
+            window.open(searchUrl, '_blank');
+        }
+    </script>
+</body>
+
+</html>

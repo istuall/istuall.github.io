@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面布局系统</title>
+    <link rel="stylesheet" href="表单嵌入.css">
+    <script type="module" src="/module/toolbar_left.js"></script>
+</head>
+
+<body>
+    <toolbar-left></toolbar-left>
+    <div id="container">
+        <center>
+            <h1>页面布局系统</h1>
+        </center>
+        <div id="banner">
+            <div class="menu1">
+                <div class="menu-item">
+                    <center>
+                        <div class="sub-menu-item">系列课程</div>
+                        <div class="sub-menu">
+                            <div class="sub-menu-item">C++程序设计</div>
+                            <div class="sub-menu-item">Java程序设计</div>
+                            <div class="sub-menu-item">C#程序设计</div>
+                        </div>
+                    </center>
+                </div>
+            </div>
+            <div class="menu2">
+                <div class="menu-item">
+                    <center>
+                        <div class="sub-menu-item">教学课件</div>
+                        <div class="sub-menu">
+                            <div class="sub-menu-item">C++课件</div>
+                            <div class="sub-menu-item">Java课件</div>
+                            <div class="sub-menu-item">C#课件</div>
+                        </div>
+                    </center>
+                </div>
+            </div>
+            <div class="menu3">
+                <div class="menu-item">
+                    <center>
+                        <div class="sub-menu-item">教学大纲</div>
+                        <div class="sub-menu">
+                            <div class="sub-menu-item">C++大纲</div>
+                            <div class="sub-menu-item">Java大纲</div>
+                            <div class="sub-menu-item">C#大纲</div>
+                        </div>
+                    </center>
+                </div>
+            </div>
+        </div>
+        <div id="main">
+            <div id="content">
+                <center>
+                    <form action="#" method="post" onsubmit="return validateForm()">
+                        <table>
+                            <tr>
+                                <td colspan="2">
+                                    <h2 align="center">学生信息注册</h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>姓名：</td>
+                                <td><input type="text" name="name" id="name"></td>
+                            </tr>
+                            <tr>
+                                <td>性别：</td>
+                                <td>
+                                    <input type="radio" name="gender" value="male"> 男
+                                    <input type="radio" name="gender" value="female"> 女
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>出生日期</td>
+                                <td><input type="date" name="birthdate" id="birthdate" placeholder="按格式yyyy - mm - dd"></td>
+                            </tr>
+                            <tr>
+                                <td>学校：</td>
+                                <td><input type="text" name="school" id="school"></td>
+                            </tr>
+                            <tr>
+                                <td>专业：</td>
+                                <td>
+                                    <select name="major">
+                                        <option value="computer_science">计算机科学与技术</option>
+                                        <option value="electrical_engineering">电气工程及其自动化</option>
+                                        <option value="mechanical_engineering">机械工程</option>
+                                        <option value="civil_engineering">土木工程</option>
+                                        <option value="architecture">建筑工程</option>
+                                        <option value="business">工商管理</option>
+                                        <option value="economics">经济学</option>
+                                        <option value="law">法学</option>
+                                        <option value="sociology">社会学</option>
+                                        <option value="history">历史</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>体育特长：</td>
+                                <td>
+                                    <input type="checkbox" name="sports" value="basketball"> 篮球
+                                    <input type="checkbox" name="sports" value="volleyball"> 排球
+                                    <input type="checkbox" name="sports" value="football"> 足球
+                                    <input type="checkbox" name="sports" value="swimming"> 游泳
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>上传照片：</td>
+                                <td><input type="file" name="photo"></td>
+                            </tr>
+                            <tr>
+                                <td>密码：</td>
+                                <td><input type="password" name="password" id="password"></td>
+                            </tr>
+                            <tr>
+                                <td>个人介绍：</td>
+                                <td><textarea name="introduction" rows="5" cols="30" style="resize: none; overflow-y: auto; border-radius: 2px;"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <center>
+                                        <input type="submit" value="提交" style="width:100px;">
+                                        <input type="reset" value="取消" style="width:100px;">
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </center>
+            </div>
+            <div id="links">
+                <center>
+                    <table class="biankuang" id="t2">
+                        <tr class="biankuang">
+                            <th class="biankuang">姓名</th>
+                            <th class="biankuang">性别</th>
+                            <th class="biankuang">出生日期</th>
+                            <th class="biankuang">学校</th>
+                            <th class="biankuang">专业</th>
+                            <th class="biankuang">特长</th>
+                        </tr>
+                        <tr class="biankuang" id="row1" onMouseOver="changeColor('row1')" onMouseOut="resetColor('row1')">
+                            <td class="biankuang">张三</td>
+                            <td class="biankuang">男</td>
+                            <td class="biankuang">2000-01-01</td>
+                            <td class="biankuang">清华大学</td>
+                            <td class="biankuang">计算机科学与技术</td>
+                            <td class="biankuang">篮球</td>
+                        </tr>
+                        <tr class="biankuang" id="row2" onMouseOver="changeColor('row2')" onMouseOut="resetColor('row2')">
+                            <td class="biankuang">李四</td>
+                            <td class="biankuang">女</td>
+                            <td class="biankuang">2001-02-02</td>
+                            <td class="biankuang">北京大学</td>
+                            <td class="biankuang">机械工程</td>
+                            <td class="biankuang">足球</td>
+                        </tr>
+                        <tr class="biankuang" id="row3" onMouseOver="changeColor('row3')" onMouseOut="resetColor('row3')">
+                            <td class="biankuang">王五</td>
+                            <td class="biankuang">男</td>
+                            <td class="biankuang">2002-03-03</td>
+                            <td class="biankuang">复旦大学</td>
+                            <td class="biankuang">土木工程</td>
+                            <td class="biankuang">排球</td>
+                        </tr>
+                        <tr class="biankuang" id="row4" onMouseOver="changeColor('row4')" onMouseOut="resetColor('row4')">
+                            <td class="biankuang">周六</td>
+                            <td class="biankuang">女</td>
+                            <td class="biankuang">2003-04-04</td>
+                            <td class="biankuang">南京大学</td>
+                            <td class="biankuang">经济学</td>
+                            <td class="biankuang">游泳</td>
+                        </tr>
+                    </table>
+                </center>
+            </div>
+        </div>
+        <div id="footer">
+            <center>
+                u can go to my other website:
+                <a href="https://zero.istuall.fun/index/CASIOPC.html">GASIO</a>
+            </center>
+        </div>
+    </div>
+    <script src="表单嵌入.js"></script>
+</body>
+
+</html>
+
+<script>
+    function changeColor(row1) {
+        document.getElementById(row1).style.backgroundColor = '#CCCCFF';
+    }
+
+    function resetColor(row1) {
+        document.getElementById(row1).style.backgroundColor = '';
+    }
+
+    const menuItems = document.querySelectorAll('.menu-item');
+
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const subMenu = this.querySelector('.sub-menu');
+            if (subMenu.style.display === 'block') {
+                subMenu.style.display = 'none';
+            } else {
+                subMenu.style.display = 'block';
+            }
+        });
+    });
+
+    function validateForm() {
+        const name = document.getElementById('name').value;
+        const nameRegex = /^[a-zA-Z\s\u4e00-\u9fa5]+$/;
+        if (!nameRegex.test(name)) {
+            alert('姓名只能包含中文、英文和空格');
+            return false;
+        }
+        const birthdate = document.getElementById('birthdate').value;
+        if (birthdate === '') {
+            alert('请输入出生日期');
+            return false;
+        }
+        const school = document.getElementById('school').value;
+        const schoolRegex = /^[a-zA-Z\s\u4e00-\u9fa5]+$/;
+        if (!schoolRegex.test(school)) {
+            alert('学校名称只能包含中文、英文和空格');
+            return false;
+        }
+        const password = document.getElementById('password').value;
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+        if (!passwordRegex.test(password)) {
+            alert('密码至少 6 位，且必须包含字母和数字');
+            return false;
+        }
+        return true;
+    }
+</script>

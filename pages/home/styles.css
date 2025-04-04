@@ -1,0 +1,78 @@
+/* 新增标题样式 */
+
+.main-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Brush Script MT', cursive;
+    font-size: 4rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
+    text-align: center;
+}
+
+.sub-title {
+    margin-top: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7), 0 0 16px rgba(255, 255, 255, 0.5), 0 0 24px rgba(255, 255, 255, 0.3);
+}
+
+
+/* 定义亚克力板样式 */
+
+.acrylic-panel {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 58%;
+    max-width: 1000px;
+}
+
+
+/* 定义单个板块样式 */
+
+.panel-item {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    font-family: 'Brush Script MT', cursive;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex: 1;
+    justify-content: center;
+}
+
+.panel-item:hover {
+    color: #007bff;
+}
+
+
+/* 新增鼠标悬停样式 */
+
+.acrylic-panel .panel-item {
+    /* 可以添加一些默认样式，比如过渡效果 */
+    transition: all 0.3s ease;
+}
+
+.acrylic-panel .panel-item:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    /* 鼠标悬停时背景颜色变亮 */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    /* 鼠标悬停时阴影加深 */
+    transform: scale(1.05);
+    /* 鼠标悬停时稍微放大 */
+}
