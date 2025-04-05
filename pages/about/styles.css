@@ -1,5 +1,14 @@
+/* 定义自定义字体 */
+
+@font-face {
+    font-family: 'BrushScriptMTItalic';
+    src: url('../../font/Brush Script MT Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'BrushScriptMTItalic', cursive;
     margin: 0;
     padding: 0;
     background-image: url('background.jpg');

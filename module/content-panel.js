@@ -4,6 +4,14 @@ class ContentPanel extends HTMLElement {
         const template = document.createElement('template');
         template.innerHTML = `
             <style>
+                /* 定义自定义字体 */
+                @font-face {
+                    font-family: 'BrushScriptMTItalic';
+                    src: url('/font/Brush Script MT Italic.ttf') format('truetype');
+                    font-weight: normal;
+                    font-style: italic;
+                }
+
                 body {
                     display: flex;
                     justify-content: center;
@@ -57,7 +65,8 @@ class ContentPanel extends HTMLElement {
 
                 .small-panel h2 {
                     margin: 0;
-                    font-family: 'Brush Script MT', cursive;
+                    /* 修改为自定义字体 */
+                    font-family: 'BrushScriptMTItalic', cursive;
                     font-size: 1.5rem;
                     color: #333;
                     /* 新增：文本水平居中 */
@@ -66,7 +75,8 @@ class ContentPanel extends HTMLElement {
 
                 .small-panel p {
                     margin: 5px 0 0;
-                    font-family: 'Brush Script MT', cursive;
+                    /* 修改为自定义字体 */
+                    font-family: 'BrushScriptMTItalic', cursive;
                     font-size: 1rem;
                     color: #666;
                     /* 新增：文本水平居中 */

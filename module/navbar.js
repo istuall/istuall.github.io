@@ -4,6 +4,14 @@ class NavBar extends HTMLElement {
         const template = document.createElement('template');
         template.innerHTML = `
             <style>
+                /* 定义自定义字体 */
+                @font-face {
+                    font-family: 'BrushScriptMTItalic';
+                    src: url('/font/Brush Script MT Italic.ttf') format('truetype');
+                    font-weight: normal;
+                    font-style: italic;
+                }
+
                 .navbar {
                     position: fixed;
                     top: 0;
@@ -32,8 +40,8 @@ class NavBar extends HTMLElement {
                     margin-left: 1rem;
                     font-size: 2rem;
                     font-weight: bold;
-                    font-family: 'Brush Script MT', cursive;
-                    font-weight: bold;
+                    /* 使用自定义字体 */
+                    font-family: 'BrushScriptMTItalic', cursive;
                     color: #007bff;
                 }
                 
@@ -46,17 +54,18 @@ class NavBar extends HTMLElement {
                     color: #333;
                     text-decoration: none;
                     font-size: 1.1rem;
-                    transition: all 0.3s ease; /* 添加过渡效果 */
-                    font-family: 'Brush Script MT', cursive;
+                    transition: all 0.3s ease; 
+                    /* 使用自定义字体 */
+                    font-family: 'BrushScriptMTItalic', cursive;
                     font-weight: bold;
-                    padding: 0.5rem 1rem; /* 添加内边距 */
-                    border-radius: 8px; /* 添加圆角 */
+                    padding: 0.5rem 1rem; 
+                    border-radius: 8px; 
                 }
                 
                 .nav-link:hover {
-                    color: #fff; /* 鼠标悬停时文字颜色变为白色 */
-                    background-color:rgba(0, 123, 255, 0.66); /* 鼠标悬停时添加背景色 */
-                    transform: scale(1.1); /* 鼠标悬停时稍微放大 */
+                    color: #fff; 
+                    background-color:rgba(0, 123, 255, 0.66); 
+                    transform: scale(1.1); 
                 }
             </style>
             <nav class="navbar">

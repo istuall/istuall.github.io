@@ -119,21 +119,23 @@ class ToolBar extends HTMLElement {
 
         // 添加随机切换视频逻辑
         const randomBtn = this.shadowRoot.getElementById('random-video');
-        randomBtn.addEventListener('click', () => {
-            const videoBg = document.querySelector('video-background');
-            if (videoBg) {
-                const video = videoBg.shadowRoot.querySelector('video');
-                if (video) {
-                    const videos = [
-                        "/sources/background_video/Gura Yuri Camp.mp4",
-                        "/sources/background_video/上杉绘梨衣.mp4",
-                        "/sources/background_video/夏弥.mp4"
-                    ];
-                    const randomVideo = videos[Math.floor(Math.random() * videos.length)];
-                    video.src = randomVideo;
-                    video.load();
-                    video.play();
+        randomBtn.addEventListener('click', async() => {
+            try {
+                const response = await fetch('../../config/background_video.json');
+                const data = await response.json();
+                const videos = data.videos;
+                const videoBg = document.querySelector('video-background');
+                if (videoBg) {
+                    const video = videoBg.shadowRoot.querySelector('video');
+                    if (video) {
+                        const randomVideo = videos[Math.floor(Math.random() * videos.length)];
+                        video.src = randomVideo;
+                        video.load();
+                        video.play();
+                    }
                 }
+            } catch (error) {
+                console.error('Failed to load video links:', error);
             }
         });
 

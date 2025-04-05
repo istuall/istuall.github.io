@@ -22,19 +22,21 @@ class VideoBackground extends HTMLElement {
         this.attachShadow({ mode: 'open' }).appendChild(template.content.cloneNode(true));
     }
 
-    connectedCallback() {
-        const videos = [
-            // "/sources/background_video/Gura Yuri Camp.mp4",
-            "/sources/background_video/上杉绘梨衣.mp4",
-            "/sources/background_video/夏弥.mp4"
-        ];
-        const randomVideo = videos[Math.floor(Math.random() * videos.length)];
-        const videoSource = this.shadowRoot.getElementById('video-source');
-        videoSource.src = randomVideo;
-        const video = this.shadowRoot.querySelector('.video-background');
-        video.load();
-        video.play();
-        video.muted = true;
+    async connectedCallback() {
+        try {
+            const response = await fetch('../../config/background_video.json');
+            const data = await response.json();
+            const videos = data.videos;
+            const randomVideo = videos[Math.floor(Math.random() * videos.length)];
+            const videoSource = this.shadowRoot.getElementById('video-source');
+            videoSource.src = randomVideo;
+            const video = this.shadowRoot.querySelector('.video-background');
+            video.load();
+            video.play();
+            video.muted = true;
+        } catch (error) {
+            console.error('Failed to load video links:', error);
+        }
     }
 }
 
