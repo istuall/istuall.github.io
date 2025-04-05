@@ -72,7 +72,7 @@ class ToolBar extends HTMLElement {
                 </button>
                 <button class="random-btn" id="random-video">
                     🎬
-                    <span class="tooltip">随机切换视频</span>
+                    <span class="tooltip">顺序切换视频</span>
                 </button>
                 <button class="toggle-panel-btn" id="toggle-panel">
                     📜
@@ -160,6 +160,33 @@ class ToolBar extends HTMLElement {
             const body = encodeURIComponent('这是一封来自Istuall的邮件。');
             const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
             window.location.href = mailtoLink;
+        });
+
+        // 新增：当前视频索引
+        let currentVideoIndex = 0;
+
+        // 修改为顺序切换视频逻辑
+        const sequentialBtn = this.shadowRoot.getElementById('random-video');
+        sequentialBtn.addEventListener('click', async() => {
+            try {
+                const response = await fetch('../../config/background_video.json');
+                const data = await response.json();
+                const videos = data.videos;
+                const videoBg = document.querySelector('video-background');
+                if (videoBg) {
+                    const video = videoBg.shadowRoot.querySelector('video');
+                    if (video) {
+                        // 播放当前索引对应的视频
+                        video.src = videos[currentVideoIndex];
+                        video.load();
+                        video.play();
+                        // 索引加 1
+                        currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load video links:', error);
+            }
         });
     }
 }

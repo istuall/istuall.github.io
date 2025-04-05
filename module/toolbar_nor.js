@@ -5,7 +5,9 @@ class ToolBar extends HTMLElement {
         this.attachShadow({ mode: 'open' }).appendChild(this.template.content.cloneNode(true));
         this.isPlaying = false; // 默认设置为false表示静音
         this.initMusicControl();
-        this.initRandomVideo();
+        // 新增：当前视频索引
+        this.currentVideoIndex = 0;
+        this.initSequentialVideo();
     }
 
     initTemplate() {
@@ -122,19 +124,21 @@ class ToolBar extends HTMLElement {
         });
     }
 
-    initRandomVideo() {
-        const randomBtn = this.shadowRoot.getElementById('random-video');
-        randomBtn.addEventListener('click', async() => {
+    initSequentialVideo() {
+        const sequentialBtn = this.shadowRoot.getElementById('random-video');
+        sequentialBtn.addEventListener('click', async() => {
             try {
                 const response = await fetch('../../config/background_video.json');
                 const data = await response.json();
                 const videos = data.videos;
                 const video = this.getVideoElement();
                 if (video) {
-                    const randomVideo = videos[Math.floor(Math.random() * videos.length)];
-                    video.src = randomVideo;
+                    // 播放当前索引对应的视频
+                    video.src = videos[this.currentVideoIndex];
                     video.load();
                     video.play();
+                    // 索引加 1
+                    this.currentVideoIndex = (this.currentVideoIndex + 1) % videos.length;
                 }
             } catch (error) {
                 console.error('Failed to load video links:', error);

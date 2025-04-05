@@ -1,9 +1,9 @@
 {
+    "default_video": "https://holcc-cdn.haier.net/lemc/aliyun2/20250405/ebb51310655042309759bfc92c4e184f.mp4",
     "videos": [
         "https://holcc-cdn.haier.net/lemc/aliyun2/20250405/b780f42709364054b5d7a50ff43bb91d.mp4",
-        "https://holcc-cdn.haier.net/lemc/aliyun2/20250405/ebb51310655042309759bfc92c4e184f.mp4",
         "https://holcc-cdn.haier.net/lemc/aliyun2/20250405/25fd2397fd2e40cc9bd1d6fd84b78f11.mp4",
-        "https://tc.qdqqd.com/jbAkFx.mp4",
-        "https://holcc-cdn.haier.net/lemc/aliyun2/20250405/4c01469fa65b43908430a301df2fd7a0.mp4"
+        "https://holcc-cdn.haier.net/lemc/aliyun2/20250405/4c01469fa65b43908430a301df2fd7a0.mp4",
+        "https://holcc-cdn.haier.net/lemc/aliyun2/20250405/ebb51310655042309759bfc92c4e184f.mp4"
     ]
 }

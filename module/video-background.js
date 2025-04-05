@@ -26,16 +26,29 @@ class VideoBackground extends HTMLElement {
         try {
             const response = await fetch('../../config/background_video.json');
             const data = await response.json();
-            const videos = data.videos;
-            const randomVideo = videos[Math.floor(Math.random() * videos.length)];
+            const defaultVideo = data.default_video;
             const videoSource = this.shadowRoot.getElementById('video-source');
-            videoSource.src = randomVideo;
+            videoSource.src = defaultVideo;
             const video = this.shadowRoot.querySelector('.video-background');
             video.load();
             video.play();
             video.muted = true;
         } catch (error) {
-            console.error('Failed to load video links:', error);
+            console.error('Failed to load default video:', error);
+            try {
+                const response = await fetch('../../config/background_video.json');
+                const data = await response.json();
+                const videos = data.videos;
+                const randomVideo = videos[Math.floor(Math.random() * videos.length)];
+                const videoSource = this.shadowRoot.getElementById('video-source');
+                videoSource.src = randomVideo;
+                const video = this.shadowRoot.querySelector('.video-background');
+                video.load();
+                video.play();
+                video.muted = true;
+            } catch (error) {
+                console.error('Failed to load video links:', error);
+            }
         }
     }
 }
