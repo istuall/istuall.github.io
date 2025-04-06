@@ -8,9 +8,8 @@
     <link rel="icon" href="/sources/logo.jpg" type="image/x-icon">
     <link rel="shortcut icon" href="/sources/logo.jpg" type="image/x-icon">
     <link rel="stylesheet" href="./pages/home/styles.css">
-    <!-- Font Awesome 图标库 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"
-    />
+    <!-- 引入 Iconfont 图标库 -->
+    <script src="//at.alicdn.com/t/c/font_4882683_mgf9d0rr9p.js"></script>
     <script type="module" src="./module/video-background.js"></script>
     <script type="module" src="./module/navbar.js"></script>
     <script type="module" src="./module/toolbar.js"></script>
@@ -34,17 +33,29 @@
 
     <!-- 亚克力板 -->
     <div class="acrylic-panel">
+        <!-- 使用 Iconfont 的 GitHub 图标 -->
         <a href="https://github.com/istuall" class="panel-item">
-            <i class="fab fa-github"></i> Github
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-github"></use>
+            </svg> Github
         </a>
+        <!-- 使用 Iconfont 的书本图标 -->
         <a href="https://github.com/open-mmlab/mmpose.git" class="panel-item">
-            <i class="fas fa-book"></i> 正在学习使用MMPose
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-tushu"></use>
+            </svg> 正在学习使用MMPose
         </a>
+        <!-- 使用 Iconfont 的打赏图标 -->
         <a href="#加我vx：zero180t偷偷发给我" class="panel-item">
-            <i class="fas fa-donate"></i> 打赏
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-dashang"></use>
+            </svg> 打赏
         </a>
+        <!-- 使用 Iconfont 的信息图标 -->
         <a href="/pages/about/about.html" class="panel-item">
-            <i class="fas fa-info-circle"></i> 关于
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-guanyuwo"></use>
+            </svg> 关于
         </a>
     </div>
 </body>

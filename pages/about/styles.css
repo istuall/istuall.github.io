@@ -5,13 +5,6 @@
     font-style: normal;
 }
 
-body {
-    font-family: 'HYNanGongTiJ-2', sans-serif;
-}
-
-
-/* 定义自定义字体 */
-
 @font-face {
     font-family: 'BrushScriptMTItalic';
     src: url('../../font/Brush Script MT Italic.ttf') format('truetype');
@@ -37,6 +30,14 @@ nav-bar {
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 1000;
+}
+
+tool-bar {
+    position: fixed;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
     z-index: 1000;
 }
 

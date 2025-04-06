@@ -1,12 +1,16 @@
 class ToolBar extends HTMLElement {
     constructor() {
         super();
-        this.initTemplate();
-        this.attachShadow({ mode: 'open' }).appendChild(this.template.content.cloneNode(true));
-        this.isPlaying = false; // 默认设置为false表示静音
-        this.initMusicControl();
-        // 新增：当前视频索引
+        // 初始化音乐播放状态
+        this.isPlaying = false;
+        // 初始化当前视频索引
         this.currentVideoIndex = 0;
+        // 初始化模板
+        this.initTemplate();
+        // 附加影子 DOM 并插入模板内容
+        this.attachShadow({ mode: 'open' }).appendChild(this.template.content.cloneNode(true));
+        // 初始化音乐控制和顺序视频切换功能
+        this.initMusicControl();
         this.initSequentialVideo();
     }
 
@@ -14,6 +18,7 @@ class ToolBar extends HTMLElement {
         this.template = document.createElement('template');
         this.template.innerHTML = `
             <style>
+                /* 工具栏整体样式 */
                 .toolbar {
                     position: fixed;
                     top: 50%;
@@ -29,7 +34,8 @@ class ToolBar extends HTMLElement {
                     flex-direction: column;
                     gap: 0.6rem;
                 }
-                
+
+                /* 按钮通用样式 */
                 .music-btn, .random-btn {
                     width: 35px;
                     height: 35px;
@@ -45,13 +51,14 @@ class ToolBar extends HTMLElement {
                     font-size: 1.1rem;
                     position: relative;
                 }
-                
+
+                /* 按钮悬停效果 */
                 .music-btn:hover, .random-btn:hover {
                     background: #007bff;
                     transform: scale(1.1);
                 }
 
-                /* 新增提示窗口样式 */
+                /* 提示框样式 */
                 .tooltip {
                     position: absolute;
                     left: -86px;
@@ -67,6 +74,7 @@ class ToolBar extends HTMLElement {
                     transition: opacity 0.3s, visibility 0.3s;
                 }
 
+                /* 按钮悬停时显示提示框 */
                 .music-btn:hover .tooltip,
                 .random-btn:hover .tooltip {
                     opacity: 1;
@@ -75,20 +83,19 @@ class ToolBar extends HTMLElement {
             </style>
             <div class="toolbar">
                 <button class="music-btn" id="music-control">
-                    🔇 <!-- 默认显示静音图标 -->
-                    <!-- 新增提示窗口 -->
+                    🎵
                     <span class="tooltip">音乐开关</span>
                 </button>
                 <button class="random-btn" id="random-video">
-                    🎬
-                    <!-- 新增提示窗口 -->
-                    <span class="tooltip">随机背景</span>
+                    🎨
+                    <span class="tooltip">切换背景</span>
                 </button>
             </div>
         `;
     }
 
-    getVideoElement() {
+    // 检查视频元素是否存在
+    function getVideoElement() {
         const videoBg = document.querySelector('video-background');
         if (!videoBg) {
             console.error('未找到视频背景元素');
@@ -112,19 +119,13 @@ class ToolBar extends HTMLElement {
         musicBtn.addEventListener('click', () => {
             const video = this.getVideoElement();
             if (video) {
-                if (this.isPlaying) {
-                    video.muted = true;
-                    musicBtn.textContent = '🔇';
-                } else {
-                    video.muted = false;
-                    musicBtn.textContent = '🔊';
-                }
                 this.isPlaying = !this.isPlaying;
+                video.muted = !this.isPlaying;
             }
         });
     }
 
-    initSequentialVideo() {
+    async initSequentialVideo() {
         const sequentialBtn = this.shadowRoot.getElementById('random-video');
         sequentialBtn.addEventListener('click', async() => {
             try {

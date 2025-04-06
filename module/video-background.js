@@ -1,9 +1,17 @@
 class VideoBackground extends HTMLElement {
     constructor() {
         super();
-        const template = document.createElement('template');
-        template.innerHTML = `
+        // 初始化模板
+        this.setupTemplate();
+        // 附加影子 DOM
+        this.attachShadow({ mode: 'open' }).appendChild(this.template.content.cloneNode(true));
+    }
+
+    setupTemplate() {
+        this.template = document.createElement('template');
+        this.template.innerHTML = `
             <style>
+                /* 视频背景样式 */
                 .video-background {
                     position: fixed;
                     top: 0;
@@ -19,38 +27,51 @@ class VideoBackground extends HTMLElement {
                 您的浏览器不支持视频标签。
             </video>
         `;
-        this.attachShadow({ mode: 'open' }).appendChild(template.content.cloneNode(true));
     }
 
     async connectedCallback() {
         try {
-            const response = await fetch('../../config/background_video.json');
-            const data = await response.json();
-            const defaultVideo = data.default_video;
-            const videoSource = this.shadowRoot.getElementById('video-source');
-            videoSource.src = defaultVideo;
-            const video = this.shadowRoot.querySelector('.video-background');
-            video.load();
-            video.play();
-            video.muted = true;
+            // 获取视频配置
+            const videoConfig = await this.getVideoConfig();
+            // 根据当前页面选择视频源
+            const videoSourceUrl = this.selectVideoSource(videoConfig);
+            // 设置视频源
+            this.setVideoSource(videoSourceUrl);
         } catch (error) {
-            console.error('Failed to load default video:', error);
-            try {
-                const response = await fetch('../../config/background_video.json');
-                const data = await response.json();
-                const videos = data.videos;
-                const randomVideo = videos[Math.floor(Math.random() * videos.length)];
-                const videoSource = this.shadowRoot.getElementById('video-source');
-                videoSource.src = randomVideo;
-                const video = this.shadowRoot.querySelector('.video-background');
-                video.load();
-                video.play();
-                video.muted = true;
-            } catch (error) {
-                console.error('Failed to load video links:', error);
-            }
+            console.error('Failed to load video:', error);
         }
+    }
+
+    async getVideoConfig() {
+        const response = await fetch('../../config/background_video.json');
+        if (!response.ok) {
+            throw new Error(`Failed to fetch video config: ${response.status}`);
+        }
+        return await response.json();
+    }
+
+    selectVideoSource(config) {
+        const currentPage = window.location.pathname.split('/').pop();
+        if (currentPage === 'index.html' || currentPage === '') {
+            // index 页面使用默认视频
+            return config.default_video;
+        } else {
+            // 其他页面随机选择视频
+            const videos = config.videos;
+            const randomIndex = Math.floor(Math.random() * videos.length);
+            return videos[randomIndex];
+        }
+    }
+
+    setVideoSource(url) {
+        const videoSource = this.shadowRoot.getElementById('video-source');
+        videoSource.src = url;
+        const video = this.shadowRoot.querySelector('.video-background');
+        video.load();
+        video.play();
+        video.muted = true;
     }
 }
 
+// 定义自定义元素
 customElements.define('video-background', VideoBackground);

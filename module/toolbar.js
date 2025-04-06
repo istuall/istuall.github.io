@@ -1,9 +1,22 @@
+// 定义 ToolBar 自定义元素类
 class ToolBar extends HTMLElement {
     constructor() {
         super();
+        // 创建并设置模板
+        this.template = this.createTemplate();
+        // 附加影子 DOM 并插入模板内容
+        this.shadow = this.attachShadow({ mode: 'open' });
+        this.shadow.appendChild(this.template.content.cloneNode(true));
+        // 初始化组件
+        this.init();
+    }
+
+    // 创建模板元素及设置其 HTML 内容
+    createTemplate() {
         const template = document.createElement('template');
         template.innerHTML = `
             <style>
+                /* 工具栏整体样式 */
                 .toolbar {
                     position: fixed;
                     top: 50%;
@@ -19,7 +32,8 @@ class ToolBar extends HTMLElement {
                     flex-direction: column;
                     gap: 0.6rem;
                 }
-                
+
+                /* 按钮通用样式 */
                 .music-btn, .random-btn, .toggle-panel-btn, .email-btn, .hide-title-btn {
                     width: 35px;
                     height: 35px;
@@ -35,13 +49,14 @@ class ToolBar extends HTMLElement {
                     font-size: 1.1rem;
                     position: relative;
                 }
-                
+
+                /* 按钮悬停样式 */
                 .music-btn:hover, .random-btn:hover, .toggle-panel-btn:hover, .email-btn:hover, .hide-title-btn:hover {
-                    background:rgba(0, 162, 255, 0.85);
+                    background: rgba(0, 162, 255, 0.85);
                     transform: scale(1.1);
                 }
 
-                /* 新增提示窗口样式 */
+                /* 提示窗口样式 */
                 .tooltip {
                     position: absolute;
                     left: -120px;
@@ -57,6 +72,7 @@ class ToolBar extends HTMLElement {
                     transition: opacity 0.3s, visibility 0.3s;
                 }
 
+                /* 按钮悬停时提示窗口显示 */
                 .music-btn:hover .tooltip,
                 .random-btn:hover .tooltip,
                 .toggle-panel-btn:hover .tooltip,
@@ -67,142 +83,138 @@ class ToolBar extends HTMLElement {
                 }
             </style>
             <div class="toolbar">
+                <!-- 音乐控制按钮 -->
                 <button class="music-btn" id="music-control">
                     🎵
                     <span class="tooltip">控制音乐开关</span>
                 </button>
+                <!-- 随机切换视频按钮 -->
                 <button class="random-btn" id="random-video">
-                    🎬
+                    🎨
                     <span class="tooltip">顺序切换背景</span>
                 </button>
+                <!-- 切换面板按钮 -->
                 <button class="toggle-panel-btn" id="toggle-panel">
-                    📜
+                    📄
                     <span class="tooltip">亚克力板显示</span>
                 </button>
-                <button class="email-btn" id="send-email">
-                    📧
-                    <span class="tooltip">发送反馈邮件</span>
-                </button>
+                <!-- 隐藏标题按钮 -->
                 <button class="hide-title-btn" id="hide-title">
-                    🚫
+                    👋
                     <span class="tooltip">隐藏欢迎标题</span>
+                </button>
+                <!-- 发送邮件按钮 -->
+                <button class="email-btn" id="send-email">
+                    ✉️
+                    <span class="tooltip">发送反馈邮件</span>
                 </button>
             </div>
         `;
-        this.attachShadow({ mode: 'open' }).appendChild(template.content.cloneNode(true));
+        return template;
+    }
 
-        // 添加音乐控制逻辑
-        const musicBtn = this.shadowRoot.getElementById('music-control');
-        let isPlaying = false; // 默认设置为false表示静音
+    // 初始化组件，绑定事件
+    init() {
+        // 音乐播放状态标志
+        this.isPlaying = false;
+        // 当前视频索引
+        this.currentVideoIndex = 0;
 
-        // 默认静音
+        // 获取各按钮元素
+        this.musicBtn = this.shadow.getElementById('music-control');
+        this.randomBtn = this.shadow.getElementById('random-video');
+        this.togglePanelBtn = this.shadow.getElementById('toggle-panel');
+        this.emailBtn = this.shadow.getElementById('send-email');
+        this.hideTitleBtn = this.shadow.getElementById('hide-title');
+
+        // 绑定事件
+        this.bindEvents();
+        // 默认设置视频静音
+        this.setVideoMuted(true);
+    }
+
+    // 绑定按钮点击事件
+    bindEvents() {
+        this.musicBtn.addEventListener('click', this.handleMusicControl.bind(this));
+        this.randomBtn.addEventListener('click', this.handleRandomVideo.bind(this));
+        this.togglePanelBtn.addEventListener('click', this.handleTogglePanel.bind(this));
+        this.emailBtn.addEventListener('click', this.handleSendEmail.bind(this));
+        this.hideTitleBtn.addEventListener('click', this.handleHideTitle.bind(this));
+    }
+
+    // 处理音乐控制点击事件
+    handleMusicControl() {
         const videoBg = document.querySelector('video-background');
         if (videoBg) {
             const video = videoBg.shadowRoot.querySelector('video');
             if (video) {
-                video.muted = true; // 默认静音
-                musicBtn.textContent = '🔇'; // 默认显示静音图标
+                video.muted = !this.isPlaying;
+                this.isPlaying = !this.isPlaying;
             }
         }
+    }
 
-        musicBtn.addEventListener('click', () => {
+    // 处理随机/顺序切换视频点击事件
+    async handleRandomVideo() {
+        try {
+            const response = await fetch('../../config/background_video.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            const videos = data.videos;
             const videoBg = document.querySelector('video-background');
             if (videoBg) {
                 const video = videoBg.shadowRoot.querySelector('video');
                 if (video) {
-                    if (isPlaying) {
-                        video.muted = true;
-                        musicBtn.textContent = '🔇';
-                    } else {
-                        video.muted = false;
-                        musicBtn.textContent = '🔊';
-                    }
-                    isPlaying = !isPlaying;
+                    const videoSrc = videos[this.currentVideoIndex];
+                    video.src = videoSrc;
+                    video.load();
+                    video.play();
+                    this.currentVideoIndex = (this.currentVideoIndex + 1) % videos.length;
                 }
             }
-        });
+        } catch (error) {
+            console.error('Failed to load video links:', error);
+        }
+    }
 
-        // 添加随机切换视频逻辑
-        const randomBtn = this.shadowRoot.getElementById('random-video');
-        randomBtn.addEventListener('click', async() => {
-            try {
-                const response = await fetch('../../config/background_video.json');
-                const data = await response.json();
-                const videos = data.videos;
-                const videoBg = document.querySelector('video-background');
-                if (videoBg) {
-                    const video = videoBg.shadowRoot.querySelector('video');
-                    if (video) {
-                        const randomVideo = videos[Math.floor(Math.random() * videos.length)];
-                        video.src = randomVideo;
-                        video.load();
-                        video.play();
-                    }
-                }
-            } catch (error) {
-                console.error('Failed to load video links:', error);
+    // 处理切换面板点击事件
+    handleTogglePanel() {
+        const acrylicPanel = document.querySelector('.acrylic-panel');
+        if (acrylicPanel) {
+            acrylicPanel.style.display = acrylicPanel.style.display === 'none' ? 'flex' : 'none';
+        }
+    }
+
+    // 处理发送邮件点击事件
+    handleSendEmail() {
+        const recipient = 'zero180t@qq.com';
+        const subject = encodeURIComponent('来自Istuall的邮件');
+        const body = encodeURIComponent('这是一封来自Istuall的邮件。');
+        const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
+        window.location.href = mailtoLink;
+    }
+
+    // 处理隐藏标题点击事件
+    handleHideTitle() {
+        const mainTitle = document.querySelector('.main-title');
+        if (mainTitle) {
+            mainTitle.style.display = mainTitle.style.display === 'none' ? 'block' : 'none';
+        }
+    }
+
+    // 设置视频静音状态
+    setVideoMuted(isMuted) {
+        const videoBg = document.querySelector('video-background');
+        if (videoBg) {
+            const video = videoBg.shadowRoot.querySelector('video');
+            if (video) {
+                video.muted = isMuted;
             }
-        });
-
-        // 添加控制亚克力板可见性的逻辑
-        const togglePanelBtn = this.shadowRoot.getElementById('toggle-panel');
-        togglePanelBtn.addEventListener('click', () => {
-            const acrylicPanel = document.querySelector('.acrylic-panel');
-            if (acrylicPanel) {
-                if (acrylicPanel.style.display === 'none') {
-                    acrylicPanel.style.display = 'flex';
-                } else {
-                    acrylicPanel.style.display = 'none';
-                }
-            }
-        });
-
-        // 添加发送邮件逻辑
-        const emailBtn = this.shadowRoot.getElementById('send-email');
-        emailBtn.addEventListener('click', () => {
-            const recipient = 'zero180t@qq.com';
-            const subject = encodeURIComponent('来自Istuall的邮件');
-            const body = encodeURIComponent('这是一封来自Istuall的邮件。');
-            const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
-            window.location.href = mailtoLink;
-        });
-
-        // 新增：当前视频索引
-        let currentVideoIndex = 0;
-
-        // 修改为顺序切换视频逻辑
-        const sequentialBtn = this.shadowRoot.getElementById('random-video');
-        sequentialBtn.addEventListener('click', async() => {
-            try {
-                const response = await fetch('../../config/background_video.json');
-                const data = await response.json();
-                const videos = data.videos;
-                const videoBg = document.querySelector('video-background');
-                if (videoBg) {
-                    const video = videoBg.shadowRoot.querySelector('video');
-                    if (video) {
-                        // 播放当前索引对应的视频
-                        video.src = videos[currentVideoIndex];
-                        video.load();
-                        video.play();
-                        // 索引加 1
-                        currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-                    }
-                }
-            } catch (error) {
-                console.error('Failed to load video links:', error);
-            }
-        });
-
-        // 添加隐藏标题逻辑
-        const hideTitleBtn = this.shadowRoot.getElementById('hide-title');
-        hideTitleBtn.addEventListener('click', () => {
-            const mainTitle = document.querySelector('.main-title');
-            if (mainTitle) {
-                mainTitle.style.display = mainTitle.style.display === 'none' ? 'block' : 'none';
-            }
-        });
+        }
     }
 }
 
+// 定义自定义元素
 customElements.define('tool-bar', ToolBar);

@@ -98,3 +98,10 @@ body {
     transform: scale(1.05);
     /* 鼠标悬停时稍微放大 */
 }
+
+.icon {
+    width: 20px;
+    /* 设置图标宽度 */
+    height: 20px;
+    /* 设置图标高度 */
+}

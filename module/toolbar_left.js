@@ -1,15 +1,24 @@
 class ToolBarLeft extends HTMLElement {
     constructor() {
         super();
-        this.initTemplate();
+        // 初始化组件状态
+        this.initProperties();
+        // 创建模板
+        this.createTemplate();
+        // 附加影子 DOM
         this.attachShadow({ mode: 'open' }).appendChild(this.template.content.cloneNode(true));
     }
 
-    initTemplate() {
+    initProperties() {
+        // 这里可以添加更多组件状态的初始化
+    }
+
+    createTemplate() {
         this.template = document.createElement('template');
         this.template.innerHTML = `
             <style>
-                .toolbar-left {
+                /* 工具栏整体样式 */
+               .toolbar-left {
                     position: fixed;
                     top: 50%;
                     left: 10px;
@@ -24,8 +33,9 @@ class ToolBarLeft extends HTMLElement {
                     flex-direction: column;
                     gap: 0.6rem;
                 }
-                
-                .home-btn, .about-btn {
+
+                /* 按钮通用样式 */
+               .home-btn, .about-btn {
                     width: 35px;
                     height: 35px;
                     border-radius: 50%;
@@ -40,14 +50,15 @@ class ToolBarLeft extends HTMLElement {
                     font-size: 1.1rem;
                     position: relative;
                 }
-                
-                .home-btn:hover, .about-btn:hover {
+
+                /* 按钮悬停效果 */
+               .home-btn:hover, .about-btn:hover {
                     background: #007bff;
                     transform: scale(1.1);
                 }
 
-                /* 提示窗口样式 */
-                .tooltip {
+                /* 提示框样式 */
+               .tooltip {
                     position: absolute;
                     left: 40px;
                     top: 50%;
@@ -62,8 +73,9 @@ class ToolBarLeft extends HTMLElement {
                     transition: opacity 0.3s, visibility 0.3s;
                 }
 
-                .home-btn:hover .tooltip,
-                .about-btn:hover .tooltip {
+                /* 按钮悬停时显示提示框 */
+               .home-btn:hover .tooltip,
+               .about-btn:hover .tooltip {
                     opacity: 1;
                     visibility: visible;
                 }
@@ -82,6 +94,11 @@ class ToolBarLeft extends HTMLElement {
     }
 
     connectedCallback() {
+        // 绑定按钮点击事件
+        this.bindButtonEvents();
+    }
+
+    bindButtonEvents() {
         const homeButton = this.shadowRoot.getElementById('home-button');
         const aboutButton = this.shadowRoot.getElementById('about-button');
 
@@ -95,4 +112,5 @@ class ToolBarLeft extends HTMLElement {
     }
 }
 
+// 定义自定义元素
 customElements.define('tool-bar-left', ToolBarLeft);
