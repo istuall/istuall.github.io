@@ -6,12 +6,17 @@ class NavBar extends HTMLElement {
             <style>
                 /* 定义自定义字体 */
                 @font-face {
-                    font-family: 'BrushScriptMTItalic';
-                    src: url('/font/Brush Script MT Italic.ttf') format('truetype');
+                    font-family: 'HYNanGongTiJ-2';
+                    src: url('/font/HYNanGongTiJ-2.ttf') format('truetype');
                     font-weight: normal;
                     font-style: italic;
                 }
-
+                @font-face {
+                    font-family: 'BrushScriptMTItalic';
+                    src: url('/font/BrushScriptMTItalic.ttf') format('truetype');
+                    font-weight: normal;
+                    font-style: italic;
+                }
                 .navbar {
                     position: fixed;
                     top: 0;
@@ -56,7 +61,7 @@ class NavBar extends HTMLElement {
                     font-size: 1.1rem;
                     transition: all 0.3s ease; 
                     /* 使用自定义字体 */
-                    font-family: 'BrushScriptMTItalic', cursive;
+                    font-family: 'HYNanGongTiJ-2', cursive;
                     font-weight: bold;
                     padding: 0.5rem 1rem; 
                     border-radius: 8px; 

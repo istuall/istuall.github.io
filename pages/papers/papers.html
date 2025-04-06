@@ -5,38 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Istuallの展馆</title>
+    <link rel="stylesheet" href="papers.css">
     <link rel="stylesheet" href="../../papers/home/styles.css">
     <script type="module" src="../../module/video-background.js"></script>
     <script type="module" src="../../module/navbar.js"></script>
-    <script type="module" src="../../module/toolbar_nor.js"></script>
+    <!-- 引入新的工具栏组件 -->
+    <script type="module" src="../../module/papers-toolbar.js"></script>
     <script type="module" src="../../module/content-panel.js"></script>
-    <style>
-        @font-face {
-            font-family: 'BrushScriptMTItalic';
-            src: url('../../font/Brush Script MT Italic.ttf') format('truetype');
-            font-weight: normal;
-            font-style: italic;
-        }
-        
-        @font-face {
-            font-family: 'HYNanGongTiJ-2';
-            src: url('/sources/fonts/HYNanGongTiJ-2.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-        
-        body {
-            font-family: 'HYNanGongTiJ-2', sans-serif;
-        }
-    </style>
 </head>
 
 <body>
     <!-- 使用导航栏组件 -->
     <nav-bar></nav-bar>
 
-    <!-- 使用工具栏组件 -->
-    <tool-bar></tool-bar>
+    <!-- 使用新的工具栏组件 -->
+    <papers-tool-bar></papers-tool-bar>
 
     <!-- 使用视频背景组件 -->
     <video-background></video-background>

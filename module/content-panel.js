@@ -6,8 +6,8 @@ class ContentPanel extends HTMLElement {
             <style>
                 /* 定义自定义字体 */
                 @font-face {
-                    font-family: 'BrushScriptMTItalic';
-                    src: url('/font/Brush Script MT Italic.ttf') format('truetype');
+                    font-family: 'HYNanGongTiJ-2';
+                    src: url('/font/HYNanGongTiJ-2.ttf') format('truetype');
                     font-weight: normal;
                     font-style: italic;
                 }
@@ -66,7 +66,7 @@ class ContentPanel extends HTMLElement {
                 .small-panel h2 {
                     margin: 0;
                     /* 修改为自定义字体 */
-                    font-family: 'BrushScriptMTItalic', cursive;
+                    font-family: 'HYNanGongTiJ-2', cursive;
                     font-size: 1.5rem;
                     color: #333;
                     /* 新增：文本水平居中 */
@@ -76,7 +76,7 @@ class ContentPanel extends HTMLElement {
                 .small-panel p {
                     margin: 5px 0 0;
                     /* 修改为自定义字体 */
-                    font-family: 'BrushScriptMTItalic', cursive;
+                    font-family: 'HYNanGongTiJ-2', cursive;
                     font-size: 1rem;
                     color: #666;
                     /* 新增：文本水平居中 */

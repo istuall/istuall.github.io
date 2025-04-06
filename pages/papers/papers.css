@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'BrushScriptMTItalic';
+    src: url('../../font/Brush Script MT Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'HYNanGongTiJ-2';
+    src: url('/sources/fonts/HYNanGongTiJ-2.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'HYNanGongTiJ-2', sans-serif;
+}
