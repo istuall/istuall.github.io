@@ -1,3 +1,15 @@
+@font-face {
+    font-family: 'HYNanGongTiJ-2';
+    src: url('/sources/fonts/HYNanGongTiJ-2.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'HYNanGongTiJ-2', sans-serif;
+}
+
+
 /* 定义自定义字体 */
 
 @font-face {

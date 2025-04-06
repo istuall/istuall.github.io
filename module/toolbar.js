@@ -20,7 +20,7 @@ class ToolBar extends HTMLElement {
                     gap: 0.6rem;
                 }
                 
-                .music-btn, .random-btn, .toggle-panel-btn, .email-btn {
+                .music-btn, .random-btn, .toggle-panel-btn, .email-btn, .hide-title-btn {
                     width: 35px;
                     height: 35px;
                     border-radius: 50%;
@@ -36,7 +36,7 @@ class ToolBar extends HTMLElement {
                     position: relative;
                 }
                 
-                .music-btn:hover, .random-btn:hover, .toggle-panel-btn:hover, .email-btn:hover {
+                .music-btn:hover, .random-btn:hover, .toggle-panel-btn:hover, .email-btn:hover, .hide-title-btn:hover {
                     background:rgba(0, 162, 255, 0.85);
                     transform: scale(1.1);
                 }
@@ -60,7 +60,8 @@ class ToolBar extends HTMLElement {
                 .music-btn:hover .tooltip,
                 .random-btn:hover .tooltip,
                 .toggle-panel-btn:hover .tooltip,
-                .email-btn:hover .tooltip {
+                .email-btn:hover .tooltip,
+                .hide-title-btn:hover .tooltip {
                     opacity: 1;
                     visibility: visible;
                 }
@@ -72,7 +73,7 @@ class ToolBar extends HTMLElement {
                 </button>
                 <button class="random-btn" id="random-video">
                     🎬
-                    <span class="tooltip">顺序切换视频</span>
+                    <span class="tooltip">顺序切换背景</span>
                 </button>
                 <button class="toggle-panel-btn" id="toggle-panel">
                     📜
@@ -81,6 +82,10 @@ class ToolBar extends HTMLElement {
                 <button class="email-btn" id="send-email">
                     📧
                     <span class="tooltip">发送反馈邮件</span>
+                </button>
+                <button class="hide-title-btn" id="hide-title">
+                    🚫
+                    <span class="tooltip">隐藏欢迎标题</span>
                 </button>
             </div>
         `;
@@ -186,6 +191,15 @@ class ToolBar extends HTMLElement {
                 }
             } catch (error) {
                 console.error('Failed to load video links:', error);
+            }
+        });
+
+        // 添加隐藏标题逻辑
+        const hideTitleBtn = this.shadowRoot.getElementById('hide-title');
+        hideTitleBtn.addEventListener('click', () => {
+            const mainTitle = document.querySelector('.main-title');
+            if (mainTitle) {
+                mainTitle.style.display = mainTitle.style.display === 'none' ? 'block' : 'none';
             }
         });
     }

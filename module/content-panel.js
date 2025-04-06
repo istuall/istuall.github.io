@@ -105,7 +105,13 @@ class ContentPanel extends HTMLElement {
             examples.forEach(example => {
                 const smallPanel = document.createElement('a');
                 smallPanel.classList.add('small-panel');
-                smallPanel.href = example.link; // 使用配置文件中的链接
+                if (example.link === '#') {
+                    // 当链接为 # 时，不设置 href 属性
+                    // 这样点击时不会跳转
+                } else {
+                    smallPanel.href = example.link; // 使用配置文件中的链接
+                    smallPanel.target = "_blank"; // 在新标签页中打开链接
+                }
                 smallPanel.innerHTML = `
                     <h2>${example.title}</h2>
                     <p>${example.subtitle}</p>
