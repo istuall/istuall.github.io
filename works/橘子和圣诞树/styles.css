@@ -32,7 +32,6 @@ body {
 }
 
 .acrylic-panel {
-    font-family: 'HYNanGongTiJ-2', sans-serif;
     width: 450px;
     height: 350px;
     background: rgba(255, 255, 255, 0.1);
@@ -47,6 +46,26 @@ body {
 
 .acrylic-panel:hover {
     transform: translateY(-10px);
+}
+
+
+/* 添加媒体查询 */
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        /* 改为垂直排列 */
+        gap: 20px;
+        /* 减少间距 */
+    }
+    .acrylic-panel {
+        width: 75%;
+        /* 手机分辨率下占满宽度 */
+        height: 320px;
+        /* 高度自适应 */
+        padding: 15px;
+        /* 减少内边距 */
+    }
 }
 
 

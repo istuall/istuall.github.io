@@ -49,14 +49,26 @@ class ContentPanel extends HTMLElement {
                     padding: 20px;
                     width: calc(50% - 10px);
                     box-sizing: border-box;
-                    transition: all 0.3s ease; /* 添加过渡效果 */
-                    /* 新增：使内部元素水平和垂直居中 */
+                    transition: all 0.3s ease;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
-                    align-items: center; 
+                    align-items: center;
                 }
 
+                /* 添加媒体查询 */
+                @media (max-width: 768px) {
+                    .content-panel {
+                        width: 85%;
+                        margin-top: 200px; /* 增加上边距，确保不被导航栏覆盖 */
+                        margin-bottom: 30px; /* 增加下边距，确保不被底部内容覆盖 */
+                    }
+
+                    .small-panel {
+                        width: 100%;
+                        margin-bottom: 10px;
+                    }
+                }
                 .small-panel:hover {
                     background: rgba(255, 255, 255, 0.5); /* 悬停时背景颜色变亮 */
                     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* 悬停时阴影加深 */

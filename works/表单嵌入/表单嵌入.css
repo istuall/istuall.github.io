@@ -137,3 +137,15 @@ input[type="file"] {
 .sub-menu-item {
     border-radius: 2px;
 }
+
+
+/* 添加媒体查询 */
+
+@media (max-width: 768px) {
+    #container {
+        transform: scale(0.6);
+        /* 按比例缩小 */
+        transform-origin: top center;
+        /* 从顶部中心开始缩放 */
+    }
+}

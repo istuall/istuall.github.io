@@ -44,5 +44,25 @@ body {
 }
 
 .acrylic-panel:hover {
-    transform: translateY(-10px);
+    transform: scale(1.05);
+}
+
+
+/* 添加媒体查询 */
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        /* 改为垂直排列 */
+        gap: 20px;
+        /* 减少间距 */
+    }
+    .acrylic-panel {
+        width: 75%;
+        /* 手机分辨率下占满宽度 */
+        height: auto;
+        /* 高度自适应 */
+        padding: 15px;
+        /* 减少内边距 */
+    }
 }

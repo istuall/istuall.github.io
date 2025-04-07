@@ -31,6 +31,32 @@ class NavBar extends HTMLElement {
                     z-index: 1000;
                 }
                 
+                /* 修改手机端样式 */
+                @media (max-width: 768px) {
+                    .navbar {
+                        padding: 0.5rem;
+                        flex-direction: column; /* 改为垂直布局 */
+                        align-items: center; /* 内容居中 */
+                    }
+                
+                    .logo-container {
+                        display: flex; /* 显示LOGO */
+                        margin: 0 0 0.5rem 0; /* 添加下边距 */
+                    }
+                
+                    .nav-links {
+                        width: 100%;
+                        justify-content: center; /* 居中显示链接 */
+                        gap: 0.5rem;
+                        flex-wrap: wrap; /* 允许换行 */
+                    }
+                
+                    .nav-link {
+                        font-size: 0.9rem;
+                        padding: 0.3rem;
+                        white-space: nowrap;
+                    }
+                }
                 .logo-container {
                     display: flex;
                     align-items: center;
