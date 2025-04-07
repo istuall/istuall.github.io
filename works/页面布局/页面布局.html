@@ -3,74 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="wclassth=device-wclassth, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        * {
-            font-size: 18px;
-        }
-        
-        body {
-            display: flex;
-            justify-content: center;
-            /* 水平居中 */
-            align-items: center;
-            /* 垂直居中 */
-            min-height: 100vh;
-            /* 确保 body 至少占满视口高度 */
-            margin: 0;
-            /* 移除默认的外边距 */
-        }
-        
-        div {
-            border: 1px solid black;
-            margin: 10px;
-        }
-        
-        span {
-            border: 1px solid black;
-        }
-        
-        .container {
-            width: 600px;
-            height: auto;
-            background-color: rgb(255, 254, 204);
-        }
-        
-        .banner {
-            width: 550px;
-            height: 50px;
-            background-color: rgb(205, 236, 253);
-        }
-        
-        .footer {
-            width: 550px;
-            height: 50px;
-            background-color: rgb(255, 204, 255);
-        }
-        
-        span {
-            display: inline-block;
-            margin: 5px;
-        }
-        
-        .content {
-            display: inline-block;
-            width: 401px;
-            height: 200px;
-            background-color: rgb(253, 204, 202);
-        }
-        
-        .links {
-            display: inline-block;
-            width: 131px;
-            height: 200px;
-            background-color: rgb(204, 255, 204);
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面布局</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="/module/home-toolbar.js"></script>
 </head>
 
 <body>
+    <home-toolbar></home-toolbar>
     <center>
         <div class="container">
             #container

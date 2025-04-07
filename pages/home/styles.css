@@ -76,7 +76,8 @@
 }
 
 .panel-item:hover {
-    color: #007bff;
+    color: #0080ffc5;
+    font-weight: bold;
 }
 
 
