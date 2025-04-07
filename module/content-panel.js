@@ -60,7 +60,7 @@ class ContentPanel extends HTMLElement {
                 @media (max-width: 768px) {
                     .content-panel {
                         width: 85%;
-                        margin-top: 200px; /* 增加上边距，确保不被导航栏覆盖 */
+                        margin-top: 600px; /* 增加上边距，确保不被导航栏覆盖 */
                         margin-bottom: 30px; /* 增加下边距，确保不被底部内容覆盖 */
                     }
 
