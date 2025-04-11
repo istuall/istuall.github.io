@@ -122,7 +122,7 @@ class ContentPanel extends HTMLElement {
                     // 这样点击时不会跳转
                 } else {
                     smallPanel.href = example.link; // 使用配置文件中的链接
-                    smallPanel.target = "_blank"; // 在新标签页中打开链接
+                    // smallPanel.target = "_blank"; // 在新标签页中打开链接
                 }
                 smallPanel.innerHTML = `
                     <h2>${example.title}</h2>
