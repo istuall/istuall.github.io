@@ -109,9 +109,10 @@ class ContentPanel extends HTMLElement {
 
     async connectedCallback() {
         const contentPanel = this.shadowRoot.querySelector('.content-panel');
+        const configSrc = this.getAttribute('src') || '/assets/config/papers-config.json';
         try {
             // 读取配置文件
-            const response = await fetch('/assets/config/panel-config.json');
+            const response = await fetch(configSrc);
             const examples = await response.json();
 
             examples.forEach(example => {

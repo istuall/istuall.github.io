@@ -107,6 +107,7 @@ class NavBar extends HTMLElement {
                 <div class="nav-links">
                     <a href="/" class="nav-link">首页</a>
                     <a href="/pages/papers/papers.html" class="nav-link">展馆</a>
+                    <a href="/pages/tools/tools.html" class="nav-link">工具</a>
                     <a href="/pages/about/about.html" class="nav-link">关于</a>
                 </div>
             </nav>
