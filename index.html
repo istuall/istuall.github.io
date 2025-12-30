@@ -1,49 +1,20 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Istuall</title>
-    <link rel="icon" href="/assets/images/logo.jpg" type="image/x-icon">
-    <link rel="shortcut icon" href="/assets/images/logo.jpg" type="image/x-icon">
-    <link rel="stylesheet" href="./pages/home/styles.css">
-    <script src="//at.alicdn.com/t/c/font_4882683_mgf9d0rr9p.js"></script>
-    <script type="module" src="/components/video-background.js"></script>
-    <script type="module" src="/components/navbar.js"></script>
-    <script type="module" src="/components/toolbar.js"></script>
-</head>
-
-<body>
-    <nav-bar></nav-bar>
-    <tool-bar></tool-bar>
-    <video-background></video-background>
-    <div class="main-title">
-        欢迎光临
-        <div class="sub-title">istuall.fun is here</div>
-    </div>
-    <div class="acrylic-panel">
-        <a href="https://github.com/istuall" class="panel-item">
-            <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-github"></use>
-            </svg> Github
-        </a>
-        <a href="https://github.com/open-mmlab/mmpose.git" class="panel-item">
-            <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-tushu"></use>
-            </svg> 学习使用MMPose
-        </a>
-        <a href="#加我vx：zero180t偷偷发给我" class="panel-item">
-            <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-dashang"></use>
-            </svg> 打赏
-        </a>
-        <a href="/pages/about/about.html" class="panel-item">
-            <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-guanyuwo"></use>
-            </svg> 关于
-        </a>
-    </div>
-</body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') ||
+        CSS.supports('top: constant(a)'))
+      document.write(
+        '<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' +
+        (coverSupport ? ', viewport-fit=cover' : '') + '" />')
+    </script>
+    <title></title>
+    <!--preload-links-->
+    <!--app-context-->
+  </head>
+  <body>
+    <div id="app"><!--app-html--></div>
+    <script type="module" src="/main.js"></script>
+  </body>
 </html>
