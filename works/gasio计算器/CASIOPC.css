@@ -1,0 +1,192 @@
+body {
+    background-color: rgb(74, 126, 247);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+    background-size: inherit;
+    background-repeat: inherit;
+    background-position: inherit;
+    filter: blur(5px);
+    z-index: -1;
+}
+
+.box {
+    margin: auto;
+    width: 360px;
+    height: auto;
+    background-color: rgb(110, 213, 192);
+    border-top: 5px solid rgb(231, 231, 231);
+    border-left: 5px solid rgb(255, 255, 255);
+    border-right: 5px solid grey;
+    border-bottom: 5px solid grey;
+    border-radius: 35px;
+}
+
+#table1 {
+    width: 80px;
+}
+
+#table2 {
+    width: 290px;
+}
+
+#table3 {
+    width: 110px;
+}
+
+#table4 {
+    width: 10px;
+}
+
+.sun {
+    width: 99%;
+    height: 35px;
+    margin-top: 8px;
+    background-color: rgb(77, 47, 35);
+    border-radius: 8px;
+    border: 2px solid rgb(57, 179, 157);
+}
+
+#brandname {
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(46, 36, 40);
+    margin: 8px 20px 0 20px;
+}
+
+#version1 {
+    font-size: 12px;
+    margin-top: 8px;
+    margin-bottom: auto;
+    padding: 0;
+    text-align: right;
+}
+
+#version2 {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 8px;
+    margin-right: 12px;
+    margin-bottom: auto;
+    text-align: right;
+}
+
+.screen {
+    width: 324px;
+    height: 100px;
+    background-color: rgb(207, 227, 228);
+    border-top: 8px solid rgb(6, 145, 124);
+    border-left: 8px solid rgb(67, 187, 163);
+    border-right: 8px solid rgb(119, 223, 202);
+    border-bottom: 8px solid rgb(112, 218, 196);
+    border-radius: 10px;
+    margin: 10px auto;
+}
+
+.display2 {
+    height: 39%;
+    width: 317.52px;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(207, 227, 228);
+    border: 0px;
+    font-size: 20px;
+    text-align: right;
+}
+
+.display1 {
+    height: 59%;
+    width: 317.52px;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(207, 227, 228);
+    border: 0px;
+    font-size: 35px;
+    text-align: right;
+}
+
+.panel {
+    width: 324px;
+    height: auto;
+    border-bottom: 1px solid rgb(6, 145, 124);
+    border-right: 1px solid rgb(67, 187, 163);
+    border-left: 1px solid rgb(119, 223, 202);
+    border-top: 1px solid rgb(112, 218, 196);
+    padding: 8px;
+    border-radius: 10px;
+    margin: 10px auto;
+}
+
+.panel_table {
+    width: 320.76px;
+    /* border: 1px solid rgb(0, 0, 0); */
+}
+
+.button_n {
+    width: 76.9824px;
+    height: 40px;
+    /* border: 1px solid rgb(0, 0, 0); */
+}
+
+.button_n input[type="button"] {
+    width: 54px;
+    height: 98%;
+    font-size: 18px;
+    border-radius: 10px;
+    margin: 3px;
+    border-bottom: 2px solid rgb(0, 0, 0);
+    border-right: 2px solid rgb(0, 0, 0);
+    border-left: 2px solid rgb(84, 84, 84);
+    border-top: 2px solid rgb(84, 84, 84);
+    /* 正常状态下的背景颜色 */
+    /* transition: background-color 0.2s; */
+}
+
+#button0 {
+    width: 54px;
+    height: 80%;
+    font-size: 13px;
+    font-weight: bold;
+    background-color: rgb(172, 219, 141);
+}
+
+#button1 {
+    font-size: 13px;
+    font-weight: bold;
+    background-color: rgb(110, 213, 192);
+}
+
+
+/* #button2 {
+    background-color: rgb(110, 213, 192);
+} */
+
+.button_n input[type="button"]:active {
+    background-color: rgb(207, 227, 228);
+    /* 点击时的背景颜色 */
+}
+
+.image {
+    position: absolute;
+    top: 90px;
+    right: 100px;
+    width: 200px;
+    height: auto;
+}
+
+.image:hover {
+    transform: scale(2);
+}

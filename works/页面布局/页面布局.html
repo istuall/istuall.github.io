@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面布局</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="/module/home-toolbar.js"></script>
+    <style>
+        /* 添加媒体查询 */
+        
+        @media (max-width: 768px) {
+            .container {
+                transform: scale(0.7);
+                /* 按比例缩小 */
+                transform-origin: top center;
+                /* 从顶部中心开始缩放 */
+            }
+        }
+        
+        .back-to-home {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            padding: 15px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 9999;
+        }
+        .back-to-home:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .back-to-home a {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <home-toolbar></home-toolbar>
+    <div class="back-to-home">
+        <a href="../../#/">返回主页</a>
+    </div>
+
+    <div class="container">
+        <center>
+            #container
+            <div class="banner">#banner</div>
+            <span class="content">#content</span>
+            <span class="links">#links</span>
+            <div class="footer">#footer</div>
+        </center>
+    </div>
+</body>
+
+</html>
