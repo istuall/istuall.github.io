@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <title>请假详情</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Segoe UI, Arial, Roboto, "PingFang SC", "miui", "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+            background-color: #F3F7FF;
+            color: #333333;
+            font-size: 16px;
+            padding-top: 50px;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0;
+        }
+        .header {
+            background-color: white;
+            padding: 16px 16px 16px 30px;
+            margin-bottom: 10px;
+            position: relative;
+            min-height: 50px;
+            display: flex;
+            border-top: 1px solid #D7D7D7;
+        }
+        .header .rule-tag {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 14px;
+            height: 68px;
+            padding-left: 2px;
+            padding-top: 4px;
+            font-size: 12px;
+            background-color: #e7effe;
+            color: #0f5ef7;
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+        .header-content {
+            display: flex;
+            width: 100%;
+            margin-left: 5px;
+        }
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .header-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+        }
+        .header-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .leave-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+        }
+        .leave-status {
+            font-weight: 500;
+            color: #3dd4a7;
+            flex-shrink: 0;
+            margin-left: 8px;
+            max-width: 50%;
+            font-size: 14px;
+        }
+        .section {
+            background-color: white;
+            padding: 12px 16px 16px;
+            margin-bottom: 8px;
+        }
+        .section-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-left: 0;
+            color: #333333;
+        }
+        .info-item {
+            display: flex;
+            margin-bottom: 12px;
+            align-items: flex-start;
+        }
+        .info-label {
+            width: 80px;
+            color: #999999;
+            font-size: 14px;
+            margin-right: 10px;
+            flex-shrink: 0;
+            line-height: 1.6;
+        }
+        .info-value {
+            font-size: 14px;
+            color: #333333;
+            word-break: break-all;
+            flex: 1;
+            line-height: 1.6;
+        }
+        .info-value.blue {
+            color: #0f5ef7;
+        }
+        .leave-reason {
+            line-height: 1.5;
+        }
+        .attachments {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .attachment-item {
+            width: 72px;
+            height: 72px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .attachment-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .flow-info {
+            padding-bottom: 12px;
+            margin-bottom: 80px;
+        }
+        .flow-item {
+            display: flex;
+            position: relative;
+            padding-left: 16px;
+            margin-bottom: 16px;
+        }
+        .flow-item .border {
+            position: absolute;
+            left: 7px;
+            top: 16px;
+            bottom: -16px;
+            width: 1px;
+            border-left: 1px dashed #e5e5e5;
+        }
+        .flow-item:last-child .border {
+            display: none;
+        }
+        .flow-info-node {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        .flow-node-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+        .flow-node-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333333;
+        }
+        .flow-node-time {
+            font-size: 12px;
+            color: #999999;
+        }
+        .flow-node-content {
+            font-size: 13px;
+            color: #666666;
+            line-height: 1.5;
+        }
+        .signature-box {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #f2f2f2;
+        }
+        .signature-title {
+            font-size: 13px;
+            color: #999999;
+            margin-bottom: 8px;
+        }
+        .signature-image {
+            max-width: 180px;
+            height: auto;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 4px;
+            background-color: #fff;
+        }
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid #D7D7D7;
+            z-index: 1000;
+        }
+        .nav-back {
+            position: absolute;
+            left: 12px;
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .nav-close {
+            position: absolute;
+            left: 44px;
+            font-size: 22px;
+            color: #333;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .nav-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #333;
+        }
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: #fff;
+            border-top: 1px solid #e5e5e5;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 1000;
+            gap: 12px;
+        }
+        .more-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 8px;
+            cursor: pointer;
+            color: #333;
+            font-size: 12px;
+        }
+        .more-btn svg {
+            width: 20px;
+            height: 20px;
+            margin-bottom: 2px;
+        }
+        .forward-btn {
+            flex: 1;
+            height: 40px;
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #999999;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .forward-btn:active {
+            background-color: #f5f5f5;
+        }
+        .van-tab--active {
+            color: #2561ef;
+        }
+        .van-tabs__wrap {
+            border-bottom: 1px solid #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <a href="./more.html" class="nav-back">
+            <svg width="20" height="20" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <path d="M738.004594 13.657808l53.903536 53.903536-485.172047 485.172047-53.903536-53.903536 485.172047-485.172047Z" fill="currentColor"/>
+                <path d="M791.948356 930.138593l-53.903535 53.903535-485.172047-485.172047 53.903535-53.903535 485.172047 485.172047Z" fill="currentColor"/>
+            </svg>
+        </a>
+        <span class="nav-close">
+            <svg width="20" height="20" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <path d="M898.844444 125.155556c11.377778 11.377778 11.377778 34.133333 0 45.511111l-341.333333 341.333333 335.644445 335.644444c11.377778 11.377778 11.377778 34.133333 0 45.511112-11.377778 11.377778-34.133333 11.377778-45.511112 0L512 557.511111l-335.644444 335.644445c-11.377778 11.377778-34.133333 11.377778-45.511112 0-11.377778-11.377778-11.377778-34.133333 0-45.511112L466.488889 512l-341.333333-335.644444c-11.377778-17.066667-11.377778-39.822222 0-51.2 11.377778-11.377778 34.133333-11.377778 51.2 0l335.644444 341.333333 335.644444-335.644445c17.066667-17.066667 39.822222-17.066667 51.2-5.688888z" fill="currentColor"/>
+            </svg>
+        </span>
+        <span class="nav-title">请假详情</span>
+    </div>
+    <div class="container">
+        <div class="header">
+            <div class="rule-tag">请<br>假<br>规<br>则<br></div>
+            <div class="header-content">
+                <img alt="头像" class="avatar" src="./leave_files/82x.png">
+                <div class="header-info">
+                    <div class="header-title">
+                        <span class="leave-title">-</span>
+                        <span class="leave-status">已通过</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">请假内容</div>
+            <div class="info-item">
+                <div class="info-label">请假学生</div>
+                <div class="info-value blue">-</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">开始时间</div>
+                <div class="info-value">-</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">结束时间</div>
+                <div class="info-value">-</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">请假时长</div>
+                <div class="info-value">-</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">影响课程</div>
+                <div class="info-value">-</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">请假原因</div>
+                <div class="info-value leave-reason">-</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">证明材料</div>
+                <div class="info-value attachments">
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">发起位置</div>      
+                <div class="info-value blue leave-reason">-</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">请假去向</div>
+            <div class="info-item">
+                <div class="info-label">是否离校</div>
+                <div class="info-value blue">-</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">目的地</div>
+                <div class="info-value">-</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">详细地址</div>
+                <div class="info-value">-</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">紧急联系人</div>
+                <div class="info-value blue">-</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">承诺书手写签名</div>
+            <div class="info-item">
+              <img class="signature-image" src="" alt="手写签名" style="display: none;">
+            </div>
+        </div>
+        
+        <div class="section flow-info">
+            <div class="section-title">审批流程</div>
+            <div class="flow-item">
+                <div class="border"></div>
+                <div class="flow-info-node">
+                    <div class="flow-node-header">
+                        <span class="flow-node-name">辅导员</span>
+                        <span class="flow-node-time">-</span>
+                    </div>
+                    <div class="flow-node-content">已通过</div>
+                </div>
+            </div>
+            <div class="flow-item">
+                <div class="border"></div>
+                <div class="flow-info-node">
+                    <div class="flow-node-header">
+                        <span class="flow-node-name">系统</span>
+                        <span class="flow-node-time">-</span>
+                    </div>
+                    <div class="flow-node-content">提交成功</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bottom-bar">
+        <div class="more-btn" onclick="location.href='./more.html'">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <rect x="4" y="5" width="16" height="3" rx="1.5"/>
+                <rect x="7" y="11" width="10" height="3" rx="1.5"/>
+                <rect x="10" y="17" width="4" height="3" rx="1.5"/>
+            </svg>
+            <span>更多</span>
+        </div>
+        <button class="forward-btn">转发</button>
+    </div>
+    
+    <script>
+        // 从 localStorage 读取数据
+        function loadLeaveData() {
+            const leaveData = localStorage.getItem('leaveData');
+            if (!leaveData) return;
+            
+            const data = JSON.parse(leaveData);
+            
+            // 更新标题
+            const leaveTitle = document.querySelector('.leave-title');
+            if (leaveTitle && data.studentName && data.leaveType) {
+                leaveTitle.textContent = data.studentName + '的' + data.leaveType;
+            }
+            
+            // 获取所有section
+            const sections = document.querySelectorAll('.section');
+            
+            // 更新请假内容 section (第一个section)
+            const contentSection = sections[0];
+            if (contentSection) {
+                const labels = contentSection.querySelectorAll('.info-label');
+                labels.forEach((label) => {
+                    const labelText = label.textContent.trim();
+                    const valueDiv = label.nextElementSibling;
+                    if (!valueDiv || !valueDiv.classList.contains('info-value')) return;
+                    
+                    switch(labelText) {
+                        case '请假学生':
+                            valueDiv.textContent = data.studentName || '';
+                            break;
+                        case '开始时间':
+                            valueDiv.textContent = formatDateTime(data.startTime) || '';
+                            break;
+                        case '结束时间':
+                            valueDiv.textContent = formatDateTime(data.endTime) || '';
+                            break;
+                        case '请假时长':
+                            valueDiv.textContent = calculateDuration(data.startTime, data.endTime) || '';
+                            break;
+                        case '影响课程':
+                            valueDiv.textContent = data.affectedCourses || '无';
+                            break;
+                        case '请假原因':
+                            valueDiv.textContent = data.reason || '';
+                            break;
+                        case '发起位置':
+                            valueDiv.textContent = data.location || '';
+                            break;
+                    }
+                });
+            }
+            
+            // 更新请假去向 section (第二个section)
+            const destinationSection = sections[1];
+            if (destinationSection) {
+                const labels = destinationSection.querySelectorAll('.info-label');
+                labels.forEach((label) => {
+                    const labelText = label.textContent.trim();
+                    const valueDiv = label.nextElementSibling;
+                    if (!valueDiv || !valueDiv.classList.contains('info-value')) return;
+                    
+                    switch(labelText) {
+                        case '是否离校':
+                            valueDiv.textContent = data.isLeaveSchool || '是';
+                            break;
+                        case '目的地':
+                            valueDiv.textContent = data.destination || '';
+                            break;
+                        case '详细地址':
+                            valueDiv.textContent = data.detailAddress || '';
+                            break;
+                        case '联系电话':
+                            valueDiv.textContent = data.phone || '';
+                            break;
+                    }
+                });
+            }
+            
+            // 更新附件图片
+            const attachments = localStorage.getItem('leaveAttachments');
+            if (attachments) {
+                try {
+                    const attachmentList = JSON.parse(attachments);
+                    const attachmentsContainer = document.querySelector('.attachments');
+                    if (attachmentsContainer && attachmentList.length > 0) {
+                        attachmentsContainer.innerHTML = attachmentList.map((src, index) => `
+                            <div class="attachment-item">
+                                <img src="${src}" alt="附件 ${index + 1}">
+                            </div>
+                        `).join('');
+                    }
+                } catch (e) {
+                    console.error('附件解析错误:', e);
+                }
+            }
+            
+            // 更新签名图片
+            const signature = localStorage.getItem('leaveSignature');
+            const signatureImg = document.querySelector('.signature-image');
+            if (signatureImg) {
+                if (signature) {
+                    signatureImg.src = signature;
+                    signatureImg.style.display = 'block';
+                } else {
+                    signatureImg.style.display = 'none';
+                }
+            }
+        }
+        
+        function formatDateTime(dateTimeStr) {
+            if (!dateTimeStr) return '';
+            const date = new Date(dateTimeStr);
+            if (isNaN(date.getTime())) return dateTimeStr;
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            return `${year}-${month}-${day} ${hours}:${minutes}`;
+        }
+        
+        function calculateDuration(startTime, endTime) {
+            if (!startTime || !endTime) return '';
+            const start = new Date(startTime);
+            const end = new Date(endTime);
+            if (isNaN(start.getTime()) || isNaN(end.getTime())) return '';
+            const diffMs = end - start;
+            if (diffMs < 0) return '0 天 0 时 0 分';
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+            return `${diffDays} 天 ${diffHours} 时 ${diffMinutes} 分`;
+        }
+        
+        // 页面加载时读取数据
+        document.addEventListener('DOMContentLoaded', loadLeaveData);
+    </script>
+</body>
+</html>
