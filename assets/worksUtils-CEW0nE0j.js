@@ -1,0 +1,1 @@
+async function t(){try{const t=await fetch("/config/panel-config.json");if(!t.ok)throw new Error("Failed");return(await t.json()).map(t=>({name:t.title,description:t.subtitle,type:t.type||"",link:t.link,image:t.image||null}))}catch(t){return[]}}export{t as l};
