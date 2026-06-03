@@ -1,43 +1,50 @@
 [{
         "title": "GASIO计算器",
         "subtitle": "Web小应用",
+        "type": "自制",
         "link": "/works/gasio计算器/CASIOPC.html",
-        "icon": "🧮"
+        "icon": "calculator"
     },
     {
         "title": "昨日校园",
-        "subtitle": "【🏫】昨日校园",
+        "subtitle": "昨日校园APP",
+        "type": "自制",
         "link": "/works/昨日校园/index.html",
-        "icon": "🏫"
+        "icon": "school"
     },
     {
         "title": "橘子和圣诞树",
-        "subtitle": "【🥳】橘子🍊与圣诞树🎄",
+        "subtitle": "橘子与圣诞树",
+        "type": "自制",
         "link": "/works/橘子和圣诞树/oat.html",
-        "icon": "🎄"
+        "icon": "tree"
     },
     {
         "title": "表单嵌入",
         "subtitle": "Web布局练习",
+        "type": "自制",
         "link": "/works/表单嵌入/表单嵌入.html",
-        "icon": "📝"
+        "icon": "form"
     },
     {
         "title": "页面布局",
         "subtitle": "Web布局练习",
+        "type": "自制",
         "link": "/works/页面布局/页面布局.html",
-        "icon": "📐"
+        "icon": "layout"
     },
     {
         "title": "Web起源",
         "subtitle": "Web入门",
+        "type": "自制",
         "link": "/works/Web起源/index.html",
-        "icon": "🌐"
+        "icon": "globe"
     },
     {
         "title": "shoka|网址收藏",
         "subtitle": "收藏的一个不错的素材网站。",
+        "type": "转载",
         "link": "https://shoka.lostyu.me/webstack/",
-        "icon": "⭐"
+        "icon": "star"
     }
 ]
