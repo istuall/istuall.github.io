@@ -27,6 +27,13 @@
         "icon": "form"
     },
     {
+        "title": "BestSYM",
+        "subtitle": "BestSYM",
+        "type": "自制",
+        "link": "/works/tay/bsetsym.html",
+        "icon": "bestsym"
+    },
+    {
         "title": "页面布局",
         "subtitle": "Web布局练习",
         "type": "自制",
